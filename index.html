@@ -4,488 +4,14 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Emilio Damonte — Diseño, contenido & producto</title>
-<meta name="description" content="Diseño gráfico, UX/UI, contenido y diseño espacial. Llevo identidades de marca a la web, las redes, el espacio y la vía pública.">
+<meta name="description" content="El portfolio de Emilio Damonte — diseño web, contenido y señalética para marcas reales, en Buenos Aires.">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='20' fill='%230c0c0b'/%3E%3Ctext x='50' y='68' font-size='60' text-anchor='middle' fill='%23d8ff4f'%3E%E2%9C%A6%3C/text%3E%3C/svg%3E">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@500;600;700;800;900&family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;1,9..144,400;1,9..144,500;1,9..144,600&family=Archivo:wght@400;500;600&display=swap" rel="stylesheet">
-<style>
-
-/* ============ RESET & BASE ============ */
-* { margin:0; padding:0; box-sizing:border-box; }
-html { scroll-behavior:smooth; }
-:root{
-  --bg: #0c0c0b;
-  --bg-soft:#141412;
-  --paper:#f3ede2;
-  --ink:#f3ede2;
-  --muted:#8f897a;
-  --line: rgba(243,237,226,0.14);
-  --line-strong: rgba(243,237,226,0.32);
-  --accent:#d8ff4f;
-  --accent-dim: #9fbf3a;
-  --serif: 'Fraunces', serif;
-  --cond: 'Barlow Condensed', sans-serif;
-  --sans: 'Archivo', sans-serif;
-  --maxw: 1360px;
-
-  /* ---- Type scale (semantic, descending by role — see better-typography) ---- */
-  --fs-display: clamp(52px, 8.6vw, 148px);  /* hero h1 — the single biggest thing on the page */
-  --fs-feature: clamp(46px, 6vw, 104px);    /* case-study h2 — one per case section, its focal point */
-  --fs-section: clamp(34px, 4.4vw, 64px);   /* section h2 — "002 Trabajo seleccionado" etc. */
-  --fs-card: clamp(30px, 3.4vw, 52px);      /* card h3 — nested under a section h2, must stay subordinate */
-  --fs-cta: clamp(48px, 9vw, 140px);        /* closing contact h2 — its own standalone moment */
-
-  /* ---- Spacing scale (8px base). Applied to new/refactored rules below
-     and to existing values that already matched exactly — not a full
-     rewrite of every margin/padding in the file. ---- */
-  --space-1: 8px;
-  --space-2: 16px;
-  --space-3: 24px;
-  --space-4: 32px;
-  --space-5: 48px;
-  --space-6: 64px;
-  --space-7: 80px;
-  --space-8: 96px;
-  --space-9: 128px;
-}
-html, body{ overscroll-behavior-y:none; }
-body{
-  background:var(--bg);
-  color:var(--ink);
-  font-family:var(--sans);
-  overflow-x:hidden;
-  -webkit-font-smoothing:antialiased;
-  -moz-osx-font-smoothing:grayscale;
-}
-#top{ will-change:transform; }
-img{ display:block; max-width:100%; background:var(--bg-soft); color:var(--muted); font-size:13px; }
-/* lazy-loaded images fade in once decoded instead of popping in; a
-   background/text color is set above so a slow-loading or a genuinely
-   broken image (missing file) still reads as an intentional neutral
-   placeholder — with its alt text — rather than a blank/white hole */
-img[loading="lazy"]{ opacity:0; transition:opacity .5s ease; }
-img[loading="lazy"].is-loaded{ opacity:1; }
-img.img-error{ border:1px solid var(--line); object-fit:contain; padding:24px; }
-@media (prefers-reduced-motion: reduce){ img[loading="lazy"]{ transition:none; } }
-a{ color:inherit; text-decoration:none; }
-.wrap{ width:100%; max-width:var(--maxw); margin:0 auto; padding:0 40px; }
-@media (max-width:600px){
-  .wrap{ padding:0 22px; }
-  header{ padding:20px 22px; flex-wrap:wrap; gap:10px; }
-  header.scrolled{ padding:14px 22px; }
-  section{ padding:90px 0; }
-  .case{ padding:100px 0; }
-}
-.italic{ font-family:var(--serif); font-style:italic; font-weight:400; }
-::selection{ background:var(--accent); color:#0c0c0b; }
-a:focus-visible, button:focus-visible{ outline:2px solid var(--accent); outline-offset:3px; border-radius:2px; }
-
-/* skip link — hidden until keyboard-focused, lets keyboard/screen-reader
-   users jump past the header and mobile-menu button straight to <main> */
-.skip-link{
-  position:fixed; top:-60px; left:16px; z-index:2200;
-  background:var(--accent); color:#0c0c0b;
-  font-family:var(--cond); font-weight:700; font-size:14px; letter-spacing:0.5px; text-transform:uppercase;
-  padding:12px 20px; border-radius:8px;
-  transition:top .2s ease;
-}
-.skip-link:focus{ top:16px; outline:2px solid var(--paper); outline-offset:2px; }
-
-@media (prefers-reduced-motion: reduce){
-  html{ scroll-behavior:auto; }
-  .marquee-track{ animation:none; }
-  .reveal{ opacity:1 !important; transform:none !important; transition:none !important; }
-  .work-media img, .more-item img{ transition:none !important; }
-  .mobile-menu, .menu-scrim{ transition:opacity .2s ease !important; }
-}
-@media (prefers-reduced-transparency: reduce){
-  header.scrolled{ background:rgba(12,12,11,0.98); backdrop-filter:none; -webkit-backdrop-filter:none; }
-  .mobile-menu{ background:rgba(14,14,13,0.99); backdrop-filter:none; -webkit-backdrop-filter:none; }
-}
-
-/* instant press feedback — responds on pointerdown, not release */
-[data-press]{ transition:transform .12s cubic-bezier(.2,.8,.4,1); }
-[data-press].is-pressed{ transform:scale(0.94); }
-.work-card[data-press].is-pressed{ transform:scale(0.99); }
-.menu-toggle[data-press].is-pressed{ transform:scale(0.88); }
-
-.hero-glow{
-  position:absolute; top:8%; left:50%; width:1100px; height:700px;
-  transform:translateX(-50%);
-  background:radial-gradient(ellipse at center, rgba(216,255,79,0.10) 0%, rgba(216,255,79,0) 68%);
-  pointer-events:none; z-index:0;
-}
-
-/* cursor-follow label */
-.hover-tag{
-  position:fixed; top:0; left:0; z-index:2000; pointer-events:none;
-  font-family:var(--cond); font-weight:700; font-size:14px; letter-spacing:1px; text-transform:uppercase;
-  background:var(--accent); color:#0c0c0b; padding:10px 18px; border-radius:100px;
-  opacity:0; transform:translate(-50%,-50%) scale(0.6);
-  transition:opacity .25s ease, transform .25s cubic-bezier(.16,1,.3,1);
-  white-space:nowrap;
-}
-.hover-tag.show{ opacity:1; transform:translate(-50%,-50%) scale(1); }
-@media (hover:none), (pointer:coarse){ .hover-tag{ display:none; } }
-
-/* subtle grain */
-body::before{
-  content:"";
-  position:fixed; inset:0;
-  pointer-events:none;
-  z-index:9999;
-  opacity:0.035;
-  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
-  mix-blend-mode:overlay;
-}
-
-/* ============ NAV ============ */
-header{
-  position:fixed; top:0; left:0; right:0; z-index:1600;
-  display:flex; align-items:center; justify-content:space-between;
-  padding:26px 40px;
-  transition:background .3s ease, border-color .3s ease, padding .3s ease;
-  border-bottom:1px solid transparent;
-}
-header.scrolled{
-  background:rgba(12,12,11,0.68);
-  backdrop-filter:blur(20px) saturate(180%);
-  -webkit-backdrop-filter:blur(20px) saturate(180%);
-  border-bottom:1px solid rgba(243,237,226,0.16);
-  padding:16px 40px;
-}
-.logo{
-  font-family:var(--cond); font-weight:800; font-size:20px;
-  letter-spacing:0.5px; text-transform:uppercase;
-  display:flex; flex-direction:column; line-height:1;
-}
-.logo span{
-  font-family:var(--serif); font-style:italic; font-weight:400;
-  font-size:11px; letter-spacing:0.2px; color:var(--muted);
-  text-transform:none; margin-top:4px;
-}
-nav ul{ display:flex; gap:36px; list-style:none; }
-nav a{
-  font-family:var(--cond); font-weight:600; font-size:15px;
-  letter-spacing:0.5px; text-transform:uppercase;
-  position:relative; padding-bottom:3px;
-}
-nav a::after{
-  content:""; position:absolute; left:0; bottom:0; width:0; height:1px;
-  background:var(--accent); transition:width .25s ease;
-}
-nav a:hover::after{ width:100%; }
-.status-chip{
-  display:flex; align-items:center; gap:8px;
-  font-family:var(--cond); font-weight:600; font-size:13px; letter-spacing:0.5px;
-  text-transform:uppercase; color:var(--muted);
-  border:1px solid var(--line); padding:7px 14px; border-radius:100px;
-}
-.status-dot{ width:7px; height:7px; border-radius:50%; background:var(--accent); box-shadow:0 0 8px var(--accent); }
-.nav-links, .status-chip{ display:flex; }
-@media (max-width:860px){ nav ul, .status-chip{ display:none; } }
-
-/* ============ MOBILE MENU (glass sheet, spring-driven, interruptible) ============ */
-.menu-toggle{
-  display:none; position:relative; width:44px; height:44px; border:1px solid var(--line); border-radius:100px;
-  background:rgba(243,237,226,0.04); cursor:pointer; align-items:center; justify-content:center; flex-direction:column; gap:5px;
-  -webkit-tap-highlight-color:transparent; flex-shrink:0;
-}
-.menu-toggle span{ display:block; width:16px; height:1.5px; background:var(--paper); transition:transform .3s cubic-bezier(.16,1,.3,1), opacity .2s ease; }
-.menu-toggle.open span:first-child{ transform:translateY(3.25px) rotate(45deg); }
-.menu-toggle.open span:last-child{ transform:translateY(-3.25px) rotate(-45deg); }
-@media (max-width:860px){ .menu-toggle{ display:flex; } }
-
-.menu-scrim{
-  position:fixed; inset:0; background:rgba(0,0,0,0.55); z-index:1400;
-  opacity:0; pointer-events:none;
-}
-.mobile-menu{
-  position:fixed; top:0; right:0; bottom:0; width:min(340px,84vw); z-index:1500;
-  background:rgba(20,20,18,0.78);
-  backdrop-filter:blur(26px) saturate(160%); -webkit-backdrop-filter:blur(26px) saturate(160%);
-  border-left:1px solid rgba(243,237,226,0.16);
-  box-shadow:-1px 0 0 rgba(243,237,226,0.06) inset;
-  padding:110px 36px 40px; display:flex; flex-direction:column; gap:4px;
-  transform:translateX(100%);
-  pointer-events:none;
-}
-.mobile-menu a{
-  font-family:var(--cond); font-weight:700; font-size:30px; text-transform:uppercase;
-  padding:16px 0; border-bottom:1px solid var(--line); letter-spacing:-0.015em;
-}
-.mm-status{
-  margin-top:auto; font-family:var(--cond); font-weight:600; font-size:13px; color:var(--muted);
-  display:flex; align-items:center; gap:8px; text-transform:uppercase; letter-spacing:0.5px;
-}
-
-/* ============ HERO ============ */
-.hero{
-  min-height:100vh;
-  display:flex; flex-direction:column; justify-content:center;
-  padding:160px 0 80px;
-  position:relative;
-}
-.hero-eyebrow{
-  font-family:var(--cond); font-weight:600; font-size:14px; letter-spacing:3px;
-  text-transform:uppercase; color:var(--muted);
-  display:flex; align-items:center; gap:14px; margin-bottom:28px;
-}
-.hero-eyebrow .rule{ width:48px; height:1px; background:var(--line-strong); }
-h1.hero-title{
-  font-family:var(--cond); font-weight:800;
-  font-size:var(--fs-display);
-  line-height:0.92; letter-spacing:-0.03em;
-  text-transform:uppercase;
-  max-width:1300px;
-  text-wrap:balance;
-}
-@media (max-width:430px){
-  /* --fs-display's 52px floor doesn't fit the longest words ("IDENTIDADES",
-     "CUALQUIER") on narrow phones — scale down further here so nothing
-     overflows the viewport. Coefficient chosen to hand off smoothly to
-     --fs-display's own 52px floor right around 430px. */
-  h1.hero-title{ font-size:clamp(30px, 12.5vw, 52px); }
-}
-h1.hero-title em{
-  font-family:var(--serif); font-style:italic; font-weight:400;
-  text-transform:none; color:var(--paper);
-  display:inline-block;
-}
-.hero-sub{
-  margin-top:38px; max-width:560px;
-  font-size:18px; line-height:1.6; color:#c9c4b6;
-  font-weight:400; text-wrap:pretty;
-}
-.hero-meta{
-  margin-top:56px; display:flex; gap:60px; flex-wrap:wrap;
-}
-.hero-meta div{ font-family:var(--cond); }
-.hero-meta .num{ font-size:34px; font-weight:800; font-variant-numeric:tabular-nums; }
-.hero-meta .lbl{ font-size:13px; font-weight:600; color:var(--muted); letter-spacing:1px; text-transform:uppercase; margin-top:2px; }
-
-/* ============ MARQUEE ============ */
-.marquee{
-  border-top:1px solid var(--line); border-bottom:1px solid var(--line);
-  padding:22px 0; overflow:hidden; white-space:nowrap;
-  background:var(--bg-soft);
-}
-.marquee-track{ display:inline-flex; animation:scroll 32s linear infinite; }
-.marquee-track span{
-  font-family:var(--cond); font-weight:700; font-size:26px;
-  text-transform:uppercase; letter-spacing:1px; padding:0 28px;
-  color:var(--muted); display:flex; align-items:center; gap:28px;
-}
-.marquee-track span i{ font-style:normal; color:var(--accent); font-size:16px; }
-@keyframes scroll{ from{ transform:translateX(0); } to{ transform:translateX(-50%); } }
-
-/* ============ SECTION SCAFFOLDING ============ */
-section{ padding:var(--space-7) 0; position:relative; }
-.section-head{
-  display:flex; justify-content:space-between; align-items:flex-end;
-  gap:40px; margin-bottom:64px; flex-wrap:wrap;
-}
-.section-num{
-  font-family:var(--cond); font-weight:600; font-size:13px; color:var(--muted);
-  letter-spacing:2px; margin-bottom:14px; display:block;
-}
-.section-title{
-  font-family:var(--cond); font-weight:800; text-transform:uppercase;
-  font-size:var(--fs-section); line-height:1; letter-spacing:-0.02em;
-  text-wrap:balance;
-}
-.section-title em{ font-family:var(--serif); font-style:italic; font-weight:400; text-transform:none; }
-.section-note{ max-width:340px; font-size:15px; line-height:1.6; color:var(--muted); text-wrap:pretty; }
-
-.reveal{ opacity:0; transform:translateY(36px); }
-.reveal.in{ opacity:1; transform:translateY(0); }
-
-/* ============ MANIFESTO ============ */
-.manifesto{ padding-top:100px; }
-@media (max-width:600px){ .manifesto{ padding-top:64px; } }
-.manifesto blockquote{
-  font-family:var(--serif); font-style:italic; font-weight:400;
-  font-size:clamp(26px,3.6vw,46px); line-height:1.4;
-  max-width:1180px; color:var(--paper); text-wrap:pretty;
-}
-.manifesto blockquote b{ font-weight:500; color:var(--accent); font-style:italic; }
-.manifesto-tags{ margin-top:44px; display:flex; flex-wrap:wrap; gap:var(--space-2); }
-
-/* ---- Reusable "chip" component — shared pill shape for tags/labels
-   used across the manifesto, work cards and elsewhere. Modifiers only
-   set the deltas (size/spacing), the base carries the shared look. ---- */
-.chip{
-  display:inline-flex; align-items:center; gap:6px;
-  font-family:var(--cond); font-weight:600; letter-spacing:1px; text-transform:uppercase;
-  border:1px solid var(--line); border-radius:100px; color:var(--muted);
-  background:transparent;
-  transition:border-color .2s ease, color .2s ease;
-}
-.chip:hover{ border-color:var(--line-strong); color:var(--paper); }
-.tag.chip{ font-size:13px; padding:var(--space-1) var(--space-2); }
-.chip--sm{ font-size:12px; letter-spacing:0.5px; padding:5px 12px; }
-
-/* ============ FEATURED WORK GRID ============ */
-.work-grid{ display:flex; flex-direction:column; gap:2px; }
-.work-card{
-  display:grid; grid-template-columns:1.1fr 0.9fr;
-  gap:0; align-items:stretch;
-  border-top:1px solid var(--line);
-  padding:56px 0;
-  position:relative;
-}
-.work-card:last-child{ border-bottom:1px solid var(--line); }
-.work-card.reverse{ grid-template-columns:0.9fr 1.1fr; }
-.work-card.reverse .work-media{ order:2; }
-.work-card.reverse .work-info{ order:1; }
-.work-media{
-  position:relative; overflow:hidden; border-radius:2px;
-  aspect-ratio:4/3;
-}
-.work-media img{
-  width:100%; height:100%; object-fit:cover;
-  filter:grayscale(88%) contrast(1.02) brightness(0.92);
-  transform:scale(1.01);
-  transition:filter .7s ease;
-}
-.work-card:hover .work-media img{ filter:grayscale(0%) brightness(1); }
-.work-index{
-  position:absolute; top:18px; left:18px;
-  font-family:var(--cond); font-weight:600; font-size:13px; letter-spacing:1px;
-  color:var(--paper); background:rgba(12,12,11,0.55); backdrop-filter:blur(4px);
-  padding:5px 11px; border-radius:100px; border:1px solid var(--line);
-}
-.work-info{
-  padding:0 56px; display:flex; flex-direction:column; justify-content:center;
-}
-.work-cat{
-  font-family:var(--cond); font-weight:600; font-size:13px; letter-spacing:2px; text-transform:uppercase;
-  color:var(--accent); margin-bottom:var(--space-2);
-}
-.work-title{
-  font-family:var(--cond); font-weight:800; text-transform:uppercase;
-  font-size:var(--fs-card); line-height:0.95; margin-bottom:20px; letter-spacing:-0.025em;
-  text-wrap:balance;
-}
-.work-desc{ font-size:16px; line-height:1.65; color:#c9c4b6; max-width:460px; margin-bottom:26px; text-wrap:pretty; }
-.work-services{ display:flex; flex-wrap:wrap; gap:var(--space-1); margin-bottom:28px; }
-.work-link{
-  font-family:var(--cond); font-weight:700; font-size:15px; letter-spacing:1px; text-transform:uppercase;
-  display:inline-flex; align-items:center; gap:10px; width:fit-content;
-  border-bottom:1px solid var(--paper); padding-bottom:4px;
-}
-.work-link:hover{ color:var(--accent); border-color:var(--accent); }
-@media (max-width:900px){
-  .work-card, .work-card.reverse{ grid-template-columns:1fr; }
-  .work-card.reverse .work-media, .work-card.reverse .work-info{ order:initial; }
-  .work-info{ padding:36px 0 0; }
-}
-
-/* ============ CASE STUDY ============ */
-.case{ border-top:1px solid var(--line); padding:100px 0; }
-.case-top{ display:flex; justify-content:space-between; align-items:flex-start; gap:60px; margin-bottom:36px; flex-wrap:wrap; }
-.case-heading{ font-family:var(--cond); font-weight:800; text-transform:uppercase; font-size:var(--fs-feature); line-height:0.9; letter-spacing:-0.03em; text-wrap:balance; }
-.case-heading em{ font-family:var(--serif); font-style:italic; font-weight:400; text-transform:none; }
-.case-meta-list{ display:flex; flex-direction:column; gap:var(--space-2); min-width:220px; }
-.case-meta-list div{ border-bottom:1px solid var(--line); padding-bottom:14px; }
-.case-meta-list .k{ font-family:var(--cond); font-weight:600; font-size:12px; color:var(--muted); text-transform:uppercase; letter-spacing:1px; margin-bottom:6px; }
-.case-meta-list .v{ font-family:var(--cond); font-size:18px; font-weight:600; }
-
-.case-brief{ font-size:19px; line-height:1.7; color:#c9c4b6; max-width:680px; margin-bottom:var(--space-7); text-wrap:pretty; }
-.case-brief b{ color:var(--paper); font-weight:600; }
-
-.case-gallery{ display:grid; grid-template-columns:repeat(6,1fr); gap:18px; margin-bottom:90px; }
-.case-gallery img{ width:100%; height:100%; object-fit:cover; border-radius:2px; }
-.g-span-4{ grid-column:span 4; aspect-ratio:16/11; }
-.g-span-2{ grid-column:span 2; aspect-ratio:3/4; }
-.g-span-3{ grid-column:span 3; aspect-ratio:4/3; }
-.g-span-6{ grid-column:span 6; aspect-ratio:21/9; }
-.g-ig{ grid-column:span 3; aspect-ratio:4/5; }
-@media (max-width:900px){
-  .case-gallery{ grid-template-columns:repeat(2,1fr); }
-  .g-span-4,.g-span-2,.g-span-3,.g-span-6{ grid-column:span 2; aspect-ratio:4/3; }
-  .g-ig{ grid-column:span 2; aspect-ratio:4/5; }
-}
-
-.case-system{ display:grid; grid-template-columns:1fr 1fr; gap:var(--space-7); margin-bottom:90px; }
-.case-system p{ text-wrap:pretty; }
-@media (max-width:900px){ .case-system{ grid-template-columns:1fr; gap:50px; } }
-.system-block .k{ font-family:var(--cond); font-weight:600; font-size:13px; letter-spacing:2px; text-transform:uppercase; color:var(--muted); margin-bottom:22px; }
-.palette-row{ display:flex; gap:10px; margin-bottom:8px; }
-.swatch{ flex:1; aspect-ratio:1/1; border-radius:4px; border:1px solid var(--line); position:relative; }
-.swatch span{ position:absolute; bottom:8px; left:8px; font-family:var(--cond); font-weight:600; font-size:12px; letter-spacing:0.5px; background:rgba(12,12,11,0.5); padding:2px 6px; border-radius:3px; }
-.icon-row{ display:flex; gap:14px; flex-wrap:wrap; }
-.icon-row img{ width:64px; height:64px; border-radius:50%; background:#1a1a17; padding:10px; border:1px solid var(--line); }
-.type-sample{ font-family:var(--cond); font-weight:800; text-transform:uppercase; font-size:15px; letter-spacing:1px; color:var(--muted); }
-
-.case-quote{
-  font-family:var(--serif); font-style:italic; font-size:clamp(24px,3vw,38px);
-  line-height:1.5; max-width:920px; color:var(--paper); position:relative; padding-left:40px;
-}
-.case-quote::before{ content:"“"; position:absolute; left:-6px; top:-24px; font-size:80px; color:var(--accent); font-family:var(--serif); }
-
-/* ============ SECONDARY GRID ============ */
-.more-grid{ display:grid; grid-template-columns:repeat(3,1fr); gap:2px; background:var(--line); }
-.more-item{
-  background:var(--bg); position:relative; aspect-ratio:4/5; overflow:hidden;
-}
-.more-item img{
-  width:100%; height:100%; object-fit:cover;
-  filter:grayscale(85%) brightness(0.85);
-  transition:filter .6s ease;
-}
-.more-item:hover img{ filter:grayscale(0%) brightness(1); }
-.more-label{
-  position:absolute; left:0; right:0; bottom:0; padding:22px;
-  background:linear-gradient(to top, rgba(12,12,11,0.92), transparent);
-}
-.more-label .t{ font-family:var(--cond); font-weight:800; text-transform:uppercase; font-size:22px; text-wrap:balance; }
-.more-label .s{ font-family:var(--cond); font-weight:600; font-size:12px; letter-spacing:1px; text-transform:uppercase; color:var(--muted); margin-top:2px; }
-@media (max-width:900px){ .more-grid{ grid-template-columns:repeat(2,1fr); } }
-
-/* ============ PROCESS ============ */
-.process-grid{ display:grid; grid-template-columns:1fr 1fr; gap:var(--space-7); align-items:start; }
-@media (max-width:900px){ .process-grid{ grid-template-columns:1fr; gap:56px; } }
-.process-media{ position:sticky; top:120px; aspect-ratio:4/5; overflow:hidden; border-radius:2px; background:#000; }
-.process-media img, .process-media video{ width:100%; height:100%; object-fit:cover; }
-.process-steps{ display:flex; flex-direction:column; }
-.pstep{ padding:32px 0; border-top:1px solid var(--line); display:grid; grid-template-columns:60px 1fr; gap:24px; }
-.pstep:last-child{ border-bottom:1px solid var(--line); }
-.pstep .n{ font-family:var(--cond); font-weight:800; font-size:16px; color:var(--muted); }
-.pstep h3{ font-family:var(--cond); font-weight:700; text-transform:uppercase; font-size:24px; margin-bottom:10px; letter-spacing:0.5px; text-wrap:balance; }
-.pstep p{ font-size:15px; line-height:1.65; color:#c9c4b6; max-width:480px; text-wrap:pretty; }
-
-/* ============ CONTACT ============ */
-.contact{ border-top:1px solid var(--line); text-align:center; padding:180px 0 100px; }
-.contact .section-num{ text-align:center; }
-.contact-title{
-  font-family:var(--cond); font-weight:800; text-transform:uppercase;
-  font-size:var(--fs-cta); line-height:0.92; margin-bottom:40px; letter-spacing:-0.035em;
-  text-wrap:balance;
-}
-.contact-title em{ font-family:var(--serif); font-style:italic; font-weight:400; text-transform:none; }
-.contact-email{
-  font-family:var(--cond); font-weight:600; font-size:22px; letter-spacing:0.5px; color:var(--muted);
-  display:inline-flex; align-items:center; gap:12px; border-bottom:1px solid var(--line-strong); padding-bottom:8px;
-}
-.contact-email:hover{ color:var(--accent); border-color:var(--accent); }
-.contact-socials{ display:flex; justify-content:center; gap:28px; margin-top:56px; }
-.contact-socials a{ font-family:var(--cond); font-weight:600; font-size:14px; letter-spacing:1px; text-transform:uppercase; color:var(--muted); }
-.contact-socials a:hover{ color:var(--paper); }
-
-footer{
-  border-top:1px solid var(--line); padding:28px 0;
-  display:flex; justify-content:space-between; align-items:center;
-  font-family:var(--cond); font-weight:600; font-size:12px; letter-spacing:1px; text-transform:uppercase; color:var(--muted);
-  flex-wrap:wrap; gap:10px;
-}
-
-/* scroll progress */
-.progress{ position:fixed; top:0; left:0; height:2px; background:var(--accent); z-index:1001; width:0%; }
-
-
-</style>
+<link rel="preconnect" href="https://api.fontshare.com">
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet">
+<link href="https://api.fontshare.com/v2/css?f[]=clash-display@400,500,600,700&f[]=switzer@400,500,600,700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles.css?v=3">
 </head>
 <body>
 
@@ -494,13 +20,13 @@ footer{
 <div class="progress" id="progress" aria-hidden="true"></div>
 
 <header id="header">
-  <a href="#top" class="logo" data-press>EMILIO DAMONTE <span>Diseño de sistemas de marca</span></a>
+  <a href="#top" class="logo" data-press>EMILIO DAMONTE <span>No hago solo logos</span></a>
   <nav class="nav-links" aria-label="Navegación principal"><ul>
     <li><a href="#trabajo" data-press>Trabajo</a></li>
     <li><a href="#proceso" data-press>Proceso</a></li>
     <li><a href="#contacto" data-press>Contacto</a></li>
   </ul></nav>
-  <div class="status-chip"><span class="status-dot" aria-hidden="true"></span> Disponible para nuevos proyectos</div>
+  <div class="status-chip"><span class="status-dot" aria-hidden="true"></span> Con lugar para un proyecto más</div>
   <button class="menu-toggle" id="menuToggle" data-press aria-label="Abrir menú" aria-expanded="false" aria-controls="mobileMenu">
     <span></span><span></span>
   </button>
@@ -511,7 +37,7 @@ footer{
   <a href="#trabajo" data-press>Trabajo</a>
   <a href="#proceso" data-press>Proceso</a>
   <a href="#contacto" data-press>Contacto</a>
-  <div class="mm-status"><span class="status-dot" aria-hidden="true"></span> Disponible para nuevos proyectos</div>
+  <div class="mm-status"><span class="status-dot" aria-hidden="true"></span> Con lugar para un proyecto más</div>
 </nav>
 
 <main id="top">
@@ -520,15 +46,16 @@ footer{
   <section class="hero" style="padding-top:180px;">
     <div class="hero-glow"></div>
     <div class="wrap" style="position:relative; z-index:1;">
-      <div class="hero-eyebrow"><span class="rule"></span> Diseño gráfico — UX/UI — Contenido — Producto — Argentina</div>
-      <h1 class="hero-title">Identidades que <em>funcionan</em><br>en cualquier superficie.</h1>
-      <p class="hero-sub">Diseño y llevo sistemas de marca a la web, el contenido, el espacio y la vía pública — cuidando que la misma paleta, tipografía y lenguaje visual se sostengan en cada lugar donde aparecen. Cuando el volumen lo pide, potencio el proceso con IA.</p>
+      <div class="hero-eyebrow"><span class="rule"></span> Diseñador multidisciplinario — Buenos Aires</div>
+      <h1 class="hero-title">Una marca no vive<br>en <em>un solo lugar.</em></h1>
+      <p class="hero-sub">Empecé diseñando identidades. Con el tiempo terminé resolviendo también la web, el contenido de redes, la cartelería de un local y la fachada de una tienda — porque una marca prolija en el logo y desprolija en todo lo demás, en el fondo, no está resuelta. Cuando hace falta una herramienta nueva, la aprendo. IA incluida, cuando el volumen no da para hacerlo todo a mano.</p>
       <div class="hero-meta">
         <div><div class="num">08</div><div class="lbl">Marcas</div></div>
         <div><div class="num">05</div><div class="lbl">Disciplinas</div></div>
         <div><div class="num">AR</div><div class="lbl">Buenos Aires · Remoto</div></div>
       </div>
     </div>
+    <div class="hero-trail" id="heroTrail" aria-hidden="true"></div>
   </section>
 
   <!-- MARQUEE (decorative ticker — the disciplines it lists are already
@@ -544,7 +71,7 @@ footer{
   <section class="manifesto">
     <div class="wrap reveal">
       <span class="section-num">001 — Manifiesto</span>
-      <blockquote>Un sistema de marca no se sostiene solo: lo llevo a la web, al contenido, al espacio y a la vía pública — cuidando que la misma paleta, tipografía y lenguaje visual <b>se reconozcan en cualquier lugar</b> donde aparezcan.</blockquote>
+      <blockquote>No creo mucho en la separación entre “el que diseña el logo” y “el que hace las redes”. Si yo definí la paleta, prefiero ser quien decide cómo se ve en un posteo, en una fachada o en la firma de un mail — <b>menos traspasos, menos versiones raras de la misma marca.</b></blockquote>
       <div class="manifesto-tags">
         <span class="chip tag">UX/UI & Diseño web</span>
         <span class="chip tag">Contenido para redes</span>
@@ -560,8 +87,8 @@ footer{
   <section id="trabajo">
     <div class="wrap">
       <div class="section-head reveal">
-        <div><span class="section-num">002 — Trabajo seleccionado</span><h2 class="section-title">Sistemas <em>en el mundo real</em></h2></div>
-        <p class="section-note">Tres formas distintas de llevar una marca a producción: rediseño web, contenido continuo y diseño espacial — de la pantalla a la fachada.</p>
+        <div><span class="section-num">002 — Trabajo seleccionado</span><h2 class="section-title">Proyectos <em>reales, no mockups</em></h2></div>
+        <p class="section-note">Tres marcas, tres problemas distintos. Ninguno lo resolví con el mismo manual.</p>
       </div>
 
       <div class="work-grid">
@@ -570,7 +97,7 @@ footer{
           <div class="work-info">
             <span class="work-cat">Rediseño web · UX/UI</span>
             <h3 class="work-title">Ewar</h3>
-            <p class="work-desc">Su web había quedado vieja y desactualizada. La rediseñé por completo como responsable único del proyecto, y mejoré con IA el material fotográfico existente.</p>
+            <p class="work-desc">Vi su web y pensé "esto no representa lo que hacen". Me hice cargo de rediseñarla entera, y de paso metí mano en las fotos que tenían dando vueltas hace años.</p>
             <div class="work-services"><span class="chip chip--sm">UX/UI</span><span class="chip chip--sm">Diseño web</span><span class="chip chip--sm">Edición con IA</span></div>
             <span class="work-link">Ver el proyecto →</span>
           </div>
@@ -581,18 +108,18 @@ footer{
           <div class="work-info">
             <span class="work-cat">Contenido para redes · Marca ya existente</span>
             <h3 class="work-title">Tuki</h3>
-            <p class="work-desc">La identidad y el packaging ya estaban definidos. Soy el encargado total del contenido: calendarios mensuales de posteos, reels e historias, con piezas de producto potenciadas con IA.</p>
+            <p class="work-desc">Tomé una identidad ya armada y la sostengo viva mes a mes — calendario, reels e historias — apoyándome en IA para mejorar el ritmo y la calidad de producción.</p>
             <div class="work-services"><span class="chip chip--sm">Calendarios</span><span class="chip chip--sm">Reels & Historias</span><span class="chip chip--sm">Contenido con IA</span></div>
             <span class="work-link">Ver el proyecto →</span>
           </div>
         </a>
 
         <a href="#alphacan" class="work-card reveal" data-press>
-          <div class="work-media"><span class="work-index">03 / Alphacan</span><img loading="lazy" decoding="async" src="images/alphacan-post-hero.jpg" alt="Alphacan — contenido de packaging reciclable"></div>
+          <div class="work-media"><span class="work-index">03 / Alphacan</span><img loading="lazy" decoding="async" src="images/alphacan-post-hero.jpg" alt="Alphacan — posteo Día del Animal"></div>
           <div class="work-info">
             <span class="work-cat">Contenido pre-lanzamiento · Diseño espacial</span>
             <h3 class="work-title">Alphacan</h3>
-            <p class="work-desc">Contenido para redes de una marca que todavía no lanzó su producto, armado de cero. En paralelo, diseñé la fachada de un local temático de comida para perros.</p>
+            <p class="work-desc">Alphacan todavía no había lanzado el producto cuando empecé. Armé el contenido de Instagram desde cero, y en paralelo diseñé la fachada de un local con toda la temática de la marca.</p>
             <div class="work-services"><span class="chip chip--sm">Contenido para redes</span><span class="chip chip--sm">Fachada</span><span class="chip chip--sm">Cartelería</span></div>
             <span class="work-link">Ver el proyecto →</span>
           </div>
@@ -605,43 +132,25 @@ footer{
   <section class="case" id="ewar">
     <div class="wrap">
       <div class="case-top reveal">
-        <h2 class="case-heading">Ewar<br><em>rediseño web</em></h2>
+        <h2 class="case-heading">Ewar<br><em>la web que le faltaba</em></h2>
         <dl class="case-meta-list">
           <div><dt class="k">Rubro</dt><dd class="v">Materiales sustentables</dd></div>
           <div><dt class="k">Rol</dt><dd class="v">UX/UI — responsable único</dd></div>
           <div><dt class="k">Extra</dt><dd class="v">Mejora fotográfica con IA</dd></div>
+          <div><dt class="k">Web</dt><dd class="v"><a href="https://www.ewar.com.ar/" target="_blank" rel="noopener">ewar.com.ar ↗</a></dd></div>
         </dl>
       </div>
 
-      <p class="case-brief reveal"><b>Ewar</b> fabrica madera biosintética con cáscara de arroz y plásticos reciclados de otras industrias — por cada 2m² se reutilizan 15kg de plástico. Su sitio web había quedado viejo y desactualizado. Me hice cargo del rediseño completo, 100% como responsable del proyecto, para lograr una experiencia más moderna y fluida. El material fotográfico que ya tenían (fachada, producto) no estaba a la altura del nuevo sitio, así que lo mejoré con herramientas de IA antes de integrarlo.</p>
+      <p class="case-brief reveal"><b>Ewar</b> fabrica madera biosintética con cáscara de arroz y plástico reciclado — por cada 2m² se reutilizan 15kg de plástico que no van a parar a ningún lado. El problema es que su web no contaba nada de esto: parecía de otra década. Agarré el proyecto entero, solo, de punta a punta. Las fotos que tenían de fachada y producto tampoco ayudaban, así que las retoqué con IA antes de subirlas — no iba a lanzar un sitio nuevo con fotos viejas.</p>
 
       <div class="case-gallery reveal">
         <img loading="lazy" decoding="async" class="g-span-4" src="images/ewar-hero-facade.jpg" alt="Sitio web de Ewar, vista de escritorio">
         <img loading="lazy" decoding="async" class="g-span-2" src="images/ewar-site-devices.jpg" alt="Sitio web de Ewar en laptop y celular">
         <img loading="lazy" decoding="async" class="g-span-3" src="images/ewar-site-detail.jpg" alt="Detalle del home de Ewar">
-        <img loading="lazy" decoding="async" class="g-span-3" src="images/ewar-site-monitor.jpg" alt="Sitio web de Ewar en monitor">
+        <img loading="lazy" decoding="async" class="g-span-3" src="images/ewar-site-monitor.jpg" alt="Sitio web de Ewar en laptop, sección Aplicaciones">
       </div>
 
-      <div class="case-system reveal">
-        <div class="system-block">
-          <div class="k">Identidad ya existente, aplicada al nuevo sitio</div>
-          <img loading="lazy" decoding="async" src="images/ewar-palette.jpg" alt="Paleta de maderas Ewar" style="border-radius:4px; margin-bottom:14px;">
-          <p style="font-size:14px; color:var(--muted); line-height:1.6;">Los tres tonos de madera reciclada + verde identidad ya definidos por la marca — mi trabajo fue sostenerlos en la nueva experiencia web.</p>
-        </div>
-        <div class="system-block">
-          <div class="k">Material fotográfico mejorado con IA</div>
-          <div class="icon-row">
-            <img loading="lazy" decoding="async" src="images/ewar-icon-1.png" alt="Ícono Ewar 1">
-            <img loading="lazy" decoding="async" src="images/ewar-icon-2.png" alt="Ícono Ewar 2">
-            <img loading="lazy" decoding="async" src="images/ewar-icon-3.png" alt="Ícono Ewar 3">
-            <img loading="lazy" decoding="async" src="images/ewar-icon-4.png" alt="Ícono Ewar 4">
-            <img loading="lazy" decoding="async" src="images/ewar-icon-5.png" alt="Ícono Ewar 5">
-          </div>
-          <p style="font-size:14px; color:var(--muted); line-height:1.6; margin-top:14px;">Íconos de identidad ya existentes, que conviven en el sitio con las fotos de producto y de planta retocadas y mejoradas con IA.</p>
-        </div>
-      </div>
-
-      <p class="case-quote reveal">El sitio viejo no representaba lo que la marca ofrece hoy. Mi trabajo fue traducir eso a una experiencia moderna — y asegurarme de que hasta las fotos que ya tenían estuvieran a la altura.</p>
+      <p class="case-quote reveal">Lo que más me gustó de este proyecto es que no tuve que consultar nada con nadie. <em>Decidí, hice, mostré.</em> Así prefiero trabajar cuando puedo.</p>
     </div>
   </section>
 
@@ -653,11 +162,11 @@ footer{
         <dl class="case-meta-list">
           <div><dt class="k">Rubro</dt><dd class="v">Alfajores / Consumo masivo</dd></div>
           <div><dt class="k">Rol</dt><dd class="v">Contenido para redes — calendarios</dd></div>
-          <div><dt class="k">Identidad</dt><dd class="v">Ya existente (no es mi diseño)</dd></div>
+          <div><dt class="k">Identidad</dt><dd class="v">Heredada</dd></div>
         </dl>
       </div>
 
-      <p class="case-brief reveal">Cuando tomé <b>Tuki</b>, la identidad ya estaba definida: tipografía tipo burbuja en violeta y amarillo, personaje y packaging resueltos. Mi rol es exclusivamente el contenido — armo el calendario mensual de posteos, reels e historias que sostiene esa marca mes a mes. Cuando me llegan fotos de estudio del producto, las uso como base para generar contenido nuevo con IA.</p>
+      <p class="case-brief reveal">Cuando entré a <b>Tuki</b>, todo el trabajo de identidad ya estaba hecho: la tipografía burbuja, el violeta y amarillo, el personaje, el packaging. Sostengo esa identidad viva mes a mes: armo el calendario, dirijo los reels y las historias, y decido qué entra y qué no en cada tanda. Cuando me llegan fotos de estudio del producto, saco variaciones con IA para conseguir más piezas de las que tengo.</p>
 
       <div class="case-gallery reveal">
         <img loading="lazy" decoding="async" class="g-ig" src="images/tuki-hero-product.jpg" alt="Posteo Tuki — imposible resistirse">
@@ -669,22 +178,22 @@ footer{
 
       <div class="case-system reveal">
         <div class="system-block">
-          <div class="k">Paleta de marca (ya definida)</div>
+          <div class="k">Los mismos colores, mes tras mes</div>
           <div class="palette-row">
             <div class="swatch" style="background:#6a3f9e;"><span>#6A3F9E</span></div>
             <div class="swatch" style="background:#f4c430;"><span>#F4C430</span></div>
             <div class="swatch" style="background:#3c2a1e;"><span>#3C2A1E</span></div>
             <div class="swatch" style="background:#fdfaf3;"><span>#FDFAF3</span></div>
           </div>
-          <p style="font-size:14px; color:var(--muted); line-height:1.6; margin-top:14px;">Identidad heredada — mi trabajo es sostenerla consistente en cada pieza de contenido, mes tras mes.</p>
+          <p style="font-size:14px; color:var(--muted); line-height:1.6; margin-top:14px;">Violeta, amarillo, marrón y crema — los mantengo exactos en cada pieza, para sostener la estética de la marca publicación tras publicación.</p>
         </div>
         <div class="system-block">
-          <div class="k">Contenido potenciado con IA</div>
-          <p style="font-size:15px; color:var(--muted); line-height:1.7;">Cuando el cliente me pasa fotografía de estudio del producto, la uso como base para generar variaciones de contenido nuevas con IA — sin perder la consistencia visual del calendario mensual.</p>
+          <div class="k">Una foto rinde más de lo que parece</div>
+          <p style="font-size:15px; color:var(--muted); line-height:1.7;">Con una buena foto de estudio como base, saco variaciones nuevas con IA sin que se note que vienen del mismo lugar — el calendario mensual necesita volumen que la fotografía sola no siempre puede dar.</p>
         </div>
       </div>
 
-      <p class="case-quote reveal">Mi trabajo no es inventar la marca — es que se sienta igual de fresca en el posteo de este mes que en el del mes pasado.</p>
+      <p class="case-quote reveal">Este es el trabajo que hago todos los meses, <em>sin excepción:</em> sostener a Tuki con la misma energía en el primer posteo del año y en el último.</p>
     </div>
   </section>
 
@@ -700,9 +209,9 @@ footer{
         </dl>
       </div>
 
-      <p class="case-brief reveal"><b>Alphacan</b> es una marca que todavía no lanzó su producto. Cuando tomé la cuenta de Instagram tenía un mes de antigüedad y 6 posteos — mi trabajo fue generar todo el contenido de cero, con solo un mockup del packaging y el manual de marca como referencia. En paralelo, diseñé la fachada de un local de comida para perros con la temática de la marca.</p>
+      <p class="case-brief reveal"><b>Alphacan</b> todavía no había lanzado el producto cuando arranqué. La cuenta de Instagram tenía un mes de vida y seis posteos. Lo único que tenía para trabajar era un mockup del packaging y un manual de marca — ni una foto real. Armé todo el contenido con eso. En paralelo, diseñé la fachada de un local de comida para perros, con la estética de la marca presente en cada rincón.</p>
 
-      <p class="case-brief reveal" style="margin-top:-56px; font-size:15px; color:var(--muted);">— Capítulo 1: contenido para redes pre-lanzamiento. Capítulo 2: diseño de fachada. Dos frentes del mismo proyecto, separados abajo.</p>
+      <p class="case-brief reveal" style="margin-top:-56px; font-size:15px; color:var(--muted);">— Dos frentes del mismo proyecto: el contenido de redes antes de que exista el producto, y una fachada real que sí existe. Los separo abajo.</p>
 
       <div class="section-num" style="margin-bottom:24px;">Capítulo 1 — Contenido para redes, de cero</div>
       <div class="case-gallery reveal">
@@ -716,28 +225,28 @@ footer{
       <div class="case-gallery reveal">
         <img loading="lazy" decoding="async" class="g-span-4" src="images/alphacan-window.jpg" alt="Vidriera del local Alphacan">
         <img loading="lazy" decoding="async" class="g-span-2" src="images/alphacan-hero-facade.jpg" alt="Fachada del local temático Alphacan">
-        <img loading="lazy" decoding="async" class="g-span-3" src="images/alphacan-stand-mockup.jpg" alt="Diseño de exhibidor de producto Alphacan">
-        <img loading="lazy" decoding="async" class="g-span-3" src="images/alphacan-facade-02.jpg" alt="Fachada local Alphacan, otra vista">
+        <img loading="lazy" decoding="async" class="g-span-4" src="images/alphacan-stand-mockup.jpg" alt="Diseño de exhibidor de producto Alphacan">
+        <img loading="lazy" decoding="async" class="g-span-2" src="images/alphacan-facade-02.jpg" alt="Fachada local Alphacan, otra vista">
       </div>
 
       <div class="case-system reveal">
         <div class="system-block">
-          <div class="k">Paleta de marca (definida por la agencia)</div>
+          <div class="k">La misma paleta, en cualquier formato</div>
           <div class="palette-row">
             <div class="swatch" style="background:#1b3a6b;"><span>#1B3A6B</span></div>
             <div class="swatch" style="background:#b8933f;"><span>#B8933F</span></div>
             <div class="swatch" style="background:#f5f0e6;"><span>#F5F0E6</span></div>
             <div class="swatch" style="background:#1a1a1a;"><span>#1A1A1A</span></div>
           </div>
-          <p style="font-size:14px; color:var(--muted); line-height:1.6; margin-top:14px;">Dorado, azul profundo y tipografía serif — identidad que sostengo tanto en el contenido como en la fachada del local.</p>
+          <p style="font-size:14px; color:var(--muted); line-height:1.6; margin-top:14px;">Dorado, azul profundo, tipografía serif — ya venían definidos por la agencia. Mi parte fue que se vean igual de bien en un posteo que en una fachada.</p>
         </div>
         <div class="system-block">
-          <div class="k">Contenido antes de que exista el producto</div>
-          <p style="font-size:15px; color:var(--muted); line-height:1.7;">Sin fotos reales de producto ni clientes usándolo todavía, el desafío es construir la sensación de marca antes de que llegue a la calle — apoyándome en el mockup del packaging y el manual como única referencia visual.</p>
+          <div class="k">Nada de esto existía todavía</div>
+          <p style="font-size:15px; color:var(--muted); line-height:1.7;">Sin fotos reales, sin clientes usando el producto todavía. Todo lo que ves acá sale de un mockup y un manual de marca — a partir de esos dos documentos construí toda la presencia de la marca, pieza por pieza, antes de que hubiera un producto real detrás.</p>
         </div>
       </div>
 
-      <p class="case-quote reveal">Generar contenido para una marca que todavía no existe en la calle es un desafío distinto: hay que construir la sensación de marca antes de que el producto llegue.</p>
+      <p class="case-quote reveal">La parte más rara de este proyecto fue publicar contenido de un producto que nadie podía comprar todavía. Tuve que inventar la sensación de marca <em>antes de que hubiera un motivo real para tenerla.</em></p>
     </div>
   </section>
 
@@ -745,17 +254,20 @@ footer{
   <section id="mas-sistemas" style="padding-bottom:100px;">
     <div class="wrap">
       <div class="section-head reveal">
-        <div><span class="section-num">003 — Más trabajo</span><h2 class="section-title">Otras <em>marcas, otros formatos</em></h2></div>
-        <p class="section-note">De la industria pesada al retail de barrio — contenido, ploteo, stands, editorial y web en rubros muy distintos.</p>
+        <div><span class="section-num">003 — Más trabajo</span><h2 class="section-title">El resto <em>del catálogo</em></h2></div>
+        <p class="section-note">No todo necesita un case study largo — pero cada proyecto de acá también pasó de punta a punta por mis manos.</p>
       </div>
+      <p class="drag-hint" aria-hidden="true"><span>↔</span> Arrastrá para explorar</p>
     </div>
-    <div class="more-grid reveal">
-      <div class="more-item"><img loading="lazy" decoding="async" src="images/mitre-01.jpg" alt="Grupo Mitre"><div class="more-label"><div class="t">Grupo Mitre</div><div class="s">Ploteo de maquinaria · Gráfica de obra</div></div></div>
-      <div class="more-item"><img loading="lazy" decoding="async" src="images/mekano-01.jpg" alt="Mekano"><div class="more-label"><div class="t">Mekano</div><div class="s">Contenido mensual · Stand Expo Construir</div></div></div>
-      <div class="more-item"><img loading="lazy" decoding="async" src="images/linde-01.jpg" alt="Linde"><div class="more-label"><div class="t">Linde</div><div class="s">Edición de displays web</div></div></div>
-      <div class="more-item"><img loading="lazy" decoding="async" src="images/drakon-01.jpg" alt="Drakon"><div class="more-label"><div class="t">Drakon</div><div class="s">Flyers · Web nueva (en curso)</div></div></div>
-      <div class="more-item"><img loading="lazy" decoding="async" src="images/kiri-01.jpg" alt="KIRI"><div class="more-label"><div class="t">KIRI</div><div class="s">Contenido · Calendarios mensuales</div></div></div>
-      <div class="more-item"><img loading="lazy" decoding="async" src="images/soulheat-01.jpg" alt="Soulheat"><div class="more-label"><div class="t">Soulheat</div><div class="s">Edición con IA · Catálogos</div></div></div>
+    <div class="drag-gallery reveal" id="dragGallery" tabindex="0" role="region" aria-label="Galería de otros proyectos — arrastrá o usá las flechas para navegar">
+      <div class="drag-track" id="dragTrack">
+        <a href="mitre.html" class="more-item" data-press><img loading="lazy" decoding="async" src="images/mitre-01.jpg" alt="Grupo Mitre"><div class="more-label"><div class="t">Grupo Mitre</div><div class="s">Ploteo de maquinaria · Gráfica de obra</div></div></a>
+        <a href="mekano.html" class="more-item" data-press><img loading="lazy" decoding="async" src="images/mekano-01.jpg" alt="Mekano"><div class="more-label"><div class="t">Mekano</div><div class="s">Contenido mensual · Stand Expo Construir</div></div></a>
+        <a href="linde.html" class="more-item" data-press><img loading="lazy" decoding="async" src="images/linde-01.jpg" alt="Linde"><div class="more-label"><div class="t">Linde</div><div class="s">Edición de displays web</div></div></a>
+        <a href="drakon.html" class="more-item" data-press><img loading="lazy" decoding="async" src="images/drakon-01.jpg" alt="Drakon"><div class="more-label"><div class="t">Drakon</div><div class="s">Flyers · Web nueva (en curso)</div></div></a>
+        <a href="kiri.html" class="more-item" data-press><img loading="lazy" decoding="async" src="images/kiri-01.jpg" alt="KIRI"><div class="more-label"><div class="t">KIRI</div><div class="s">Contenido · Calendarios mensuales</div></div></a>
+        <a href="soulheat.html" class="more-item" data-press><img loading="lazy" decoding="async" src="images/soulheat-01.jpg" alt="Soulheat"><div class="more-label"><div class="t">Soulheat</div><div class="s">Edición con IA · Catálogos</div></div></a>
+      </div>
     </div>
   </section>
 
@@ -763,7 +275,7 @@ footer{
   <section id="proceso" style="border-top:1px solid var(--line);">
     <div class="wrap">
       <div class="section-head reveal">
-        <div><span class="section-num">004 — Cómo trabajo</span><h2 class="section-title">Proceso <em>ordenado, no rígido</em></h2></div>
+        <div><span class="section-num">004 — Cómo trabajo</span><h2 class="section-title">Cómo <em>lo hago, en serio</em></h2></div>
       </div>
 
       <div class="process-grid">
@@ -773,19 +285,19 @@ footer{
         <div class="process-steps reveal">
           <div class="pstep">
             <div class="n">01</div>
-            <div><h3>Entender el sistema</h3><p>Ya sea que diseñe la identidad de cero o herede un manual de marca, el primer paso es entender la lógica de paleta, tipografía y forma antes de producir una sola pieza.</p></div>
+            <div><h3>Primero entiendo, después dibujo</h3><p>No me importa si la identidad la armé yo o la heredé de otro diseñador. Antes de tocar una sola pieza necesito entender por qué esa paleta, esa tipografía, esa forma. Si no entiendo la lógica, se nota.</p></div>
           </div>
           <div class="pstep">
             <div class="n">02</div>
-            <div><h3>Producción con criterio</h3><p>Trabajo con varios clientes y proyectos en paralelo, así que organizo por etapas y guardo opciones antes de cerrar una pieza — mantiene la consistencia incluso con alto volumen.</p></div>
+            <div><h3>Ordeno el caos, no lo escondo</h3><p>Tengo varios clientes al mismo tiempo, cada uno con su ritmo. La única forma de no mezclar todo es ser bastante metódico con las etapas y guardar opciones antes de cerrar algo — aunque tarde un poco más.</p></div>
           </div>
           <div class="pstep">
             <div class="n">03</div>
-            <div><h3>IA como acelerador, no reemplazo</h3><p>Cuando el volumen o el timing lo piden, uso IA para mejorar fotografía existente o generar variaciones de contenido — siempre curado a mano antes de publicar.</p></div>
+            <div><h3>Uso IA cuando conviene, no porque sí</h3><p>La uso para estirar fotos que ya existen o sacar variaciones de contenido cuando el volumen no da para hacerlo todo a mano. Pero todo pasa por mis ojos antes de publicarse — si algo se ve raro, no sale.</p></div>
           </div>
           <div class="pstep">
             <div class="n">04</div>
-            <div><h3>Prueba en el mundo real</h3><p>Cuando el proyecto es espacial, monto el diseño sobre fotos reales del lugar. Necesito ver el impacto real antes de aprobar una pieza.</p></div>
+            <div><h3>Lo pruebo en el lugar real</h3><p>Con proyectos espaciales no confío en un mockup genérico. Monto el diseño sobre fotos reales del lugar donde va a estar — necesito verlo ahí, no en un cuadrado blanco de Figma.</p></div>
           </div>
         </div>
       </div>
@@ -796,7 +308,7 @@ footer{
   <section class="contact" id="contacto">
     <div class="wrap">
       <span class="section-num">005 — Contacto</span>
-      <h2 class="contact-title">Hablemos de tu<br><em>próxima marca.</em></h2>
+      <h2 class="contact-title">Escribime, y<br><em>arrancamos.</em></h2>
       <a class="contact-email" href="mailto:emilio.damonte28@gmail.com" data-press>emilio.damonte28@gmail.com ↗</a>
       <div class="contact-socials">
         <a href="#" data-press>Instagram</a>
@@ -808,7 +320,7 @@ footer{
 
   <footer>
     <div class="wrap" style="display:flex; justify-content:space-between; width:100%; flex-wrap:wrap; gap:10px;">
-      <span>© 2026 Emilio Damonte — Diseño gráfico & branding</span>
+      <span>© 2026 Emilio Damonte — diseño & contenido</span>
       <span>Buenos Aires, Argentina</span>
     </div>
   </footer>
@@ -817,262 +329,7 @@ footer{
 
 <div class="hover-tag" id="hoverTag">Ver proyecto</div>
 
-<script>
-(function(){
-  const reduceMotion = matchMedia('(prefers-reduced-motion: reduce)').matches;
-
-  /* =========================================================
-     SPRING ENGINE
-     Apple-style "damping ratio + response" springs (WWDC18 —
-     Designing Fluid Interfaces). Every value here is velocity-
-     aware and interruptible: calling springTo() on a spring that
-     is already moving just changes its target — it keeps the
-     current position/velocity and re-targets smoothly, instead
-     of restarting from a fixed keyframe. That's what lets a
-     panel be grabbed and reversed mid-flight.
-  ========================================================= */
-  function makeSpring({ zeta = 1, response = 0.32 } = {}){
-    const omega = 2 * Math.PI / response;
-    return {
-      value:0, velocity:0, target:0,
-      k: omega * omega,
-      c: 2 * zeta * omega,
-      step(dt){
-        const force = -this.k * (this.value - this.target) - this.c * this.velocity;
-        this.velocity += force * dt;
-        this.value += this.velocity * dt;
-      },
-      atRest(eps = 0.0015){
-        return Math.abs(this.target - this.value) < eps && Math.abs(this.velocity) < eps;
-      }
-    };
-  }
-
-  const activeSprings = new Set();
-  let ticking = false, lastT = null;
-  function tick(t){
-    if(lastT == null) lastT = t;
-    const dt = Math.min((t - lastT) / 1000, 0.032);
-    lastT = t;
-    activeSprings.forEach(s => {
-      s.step(dt);
-      s._onUpdate(s.value);
-      if(s.atRest()){
-        s.value = s.target; s._onUpdate(s.value);
-        activeSprings.delete(s);
-        if(s._onSettle) s._onSettle();
-      }
-    });
-    if(activeSprings.size){ requestAnimationFrame(tick); } else { ticking = false; lastT = null; }
-  }
-  function springTo(spring, target, { onUpdate, onSettle } = {}){
-    spring.target = target;
-    if(onUpdate) spring._onUpdate = onUpdate;
-    if(onSettle) spring._onSettle = onSettle;
-    activeSprings.add(spring);
-    if(!ticking){ ticking = true; requestAnimationFrame(tick); }
-  }
-
-  /* =========================================================
-     HEADER — translucent glass chrome + scroll progress
-  ========================================================= */
-  const header = document.getElementById('header');
-  const progress = document.getElementById('progress');
-  window.addEventListener('scroll', () => {
-    header.classList.toggle('scrolled', window.scrollY > 40);
-    const h = document.documentElement;
-    const pct = (h.scrollTop) / (h.scrollHeight - h.clientHeight) * 100;
-    progress.style.width = pct + '%';
-  }, { passive:true });
-
-  /* =========================================================
-     REVEAL ON SCROLL — spring fade + rise instead of a fixed-
-     duration CSS transition, critically damped (no overshoot).
-  ========================================================= */
-  const io = new IntersectionObserver((entries) => {
-    entries.forEach(e => {
-      if(!e.isIntersecting) return;
-      io.unobserve(e.target);
-      const el = e.target;
-      if(reduceMotion){ el.classList.add('in'); return; }
-      const s = makeSpring({ zeta:1, response:0.55 });
-      springTo(s, 1, {
-        onUpdate(v){
-          el.style.opacity = v;
-          el.style.transform = `translateY(${(1 - v) * 36}px)`;
-        },
-        onSettle(){ el.classList.add('in'); }
-      });
-    });
-  }, { threshold: 0.12 });
-  document.querySelectorAll('.reveal').forEach(el => io.observe(el));
-
-  /* =========================================================
-     IMAGE LOAD / ERROR STATES — every gallery image is lazy-loaded
-     (see CSS), so it needs a visible loading→loaded transition and
-     a graceful fallback if a file genuinely fails to fetch, instead
-     of silently popping in or showing a bare browser broken-icon.
-  ========================================================= */
-  document.querySelectorAll('img[loading="lazy"]').forEach(img => {
-    const markLoaded = () => img.classList.add('is-loaded');
-    if(img.complete && img.naturalWidth > 0){ markLoaded(); return; }
-    img.addEventListener('load', markLoaded, { once:true });
-    img.addEventListener('error', () => {
-      img.classList.add('is-loaded', 'img-error');
-    }, { once:true });
-  });
-
-  /* =========================================================
-     CURSOR-FOLLOW "VER PROYECTO / VER MÁS" TAG
-     Two independent springs (x/y) so momentum on one axis never
-     desyncs the other. Continuously retargeted on mousemove —
-     the tag can change direction mid-flight without a stutter.
-  ========================================================= */
-  const hoverTag = document.getElementById('hoverTag');
-  const hoverable = document.querySelectorAll('.work-media, .more-item');
-  const tagX = makeSpring({ zeta:1, response:0.22 });
-  const tagY = makeSpring({ zeta:1, response:0.22 });
-  function applyTag(){ hoverTag.style.left = tagX.value + 'px'; hoverTag.style.top = tagY.value + 'px'; }
-  hoverable.forEach(el => {
-    const label = el.closest('.more-item') ? 'Ver más' : 'Ver proyecto';
-    el.addEventListener('mouseenter', (e) => {
-      hoverTag.textContent = label;
-      tagX.value = tagX.target = e.clientX; tagX.velocity = 0;
-      tagY.value = tagY.target = e.clientY; tagY.velocity = 0;
-      applyTag();
-      hoverTag.classList.add('show');
-    });
-    el.addEventListener('mousemove', (e) => {
-      springTo(tagX, e.clientX, { onUpdate: applyTag });
-      springTo(tagY, e.clientY, { onUpdate: applyTag });
-    });
-    el.addEventListener('mouseleave', () => hoverTag.classList.remove('show'));
-  });
-
-  /* =========================================================
-     IMAGE HOVER SCALE — spring instead of a CSS transition, so
-     a quick in-out-in mouse pass reverses fluidly from wherever
-     the scale currently is, rather than restarting a keyframe.
-  ========================================================= */
-  document.querySelectorAll('.work-media img, .more-item img').forEach(img => {
-    const s = makeSpring({ zeta:1, response:0.5 });
-    s.value = s.target = 1.01;
-    const apply = (v) => { img.style.transform = `scale(${v})`; };
-    const host = img.closest('.work-media, .more-item');
-    host.addEventListener('mouseenter', () => springTo(s, 1.06, { onUpdate: apply }));
-    host.addEventListener('mouseleave', () => springTo(s, 1.01, { onUpdate: apply }));
-  });
-
-  /* =========================================================
-     PRESS FEEDBACK — react on pointerdown, not on release/click.
-  ========================================================= */
-  document.querySelectorAll('[data-press]').forEach(el => {
-    const press = () => el.classList.add('is-pressed');
-    const release = () => el.classList.remove('is-pressed');
-    el.addEventListener('pointerdown', press);
-    el.addEventListener('pointerup', release);
-    el.addEventListener('pointercancel', release);
-    el.addEventListener('pointerleave', release);
-  });
-
-  /* =========================================================
-     MOBILE MENU — spring-driven glass sheet. Retargeting the
-     same spring on every click (instead of replaying a CSS
-     animation) means the panel can be grabbed mid-slide and
-     reversed instantly: click open, click closed again before
-     it settles, and it reverses smoothly from its live position.
-  ========================================================= */
-  const menuToggle = document.getElementById('menuToggle');
-  const mobileMenu = document.getElementById('mobileMenu');
-  const menuScrim = document.getElementById('menuScrim');
-  let menuOpen = false;
-  const menuSpring = makeSpring({ zeta:1, response:0.34 });
-  function applyMenu(v){
-    mobileMenu.style.transform = `translateX(${(1 - v) * 100}%)`;
-    menuScrim.style.opacity = v;
-    menuScrim.style.pointerEvents = v > 0.02 ? 'auto' : 'none';
-    mobileMenu.style.pointerEvents = v > 0.5 ? 'auto' : 'none';
-  }
-  const menuFocusables = Array.from(mobileMenu.querySelectorAll('a'));
-  function setMenu(open){
-    menuOpen = open;
-    menuToggle.classList.toggle('open', open);
-    menuToggle.setAttribute('aria-expanded', String(open));
-    mobileMenu.setAttribute('aria-hidden', String(!open));
-    // lock background scroll while the sheet is open — the scrim covers
-    // the page visually, this stops it from also scrolling underneath
-    document.documentElement.style.overflow = open ? 'hidden' : '';
-    if(open){ menuFocusables[0] && menuFocusables[0].focus(); }
-    else if(document.activeElement && mobileMenu.contains(document.activeElement)){ menuToggle.focus(); }
-    if(reduceMotion){ menuSpring.value = menuSpring.target = open ? 1 : 0; applyMenu(menuSpring.value); return; }
-    springTo(menuSpring, open ? 1 : 0, { onUpdate: applyMenu });
-  }
-  menuToggle.addEventListener('click', () => setMenu(!menuOpen));
-  menuScrim.addEventListener('click', () => setMenu(false));
-  mobileMenu.querySelectorAll('a').forEach(a => a.addEventListener('click', () => setMenu(false)));
-  window.addEventListener('keydown', (e) => { if(e.key === 'Escape' && menuOpen) setMenu(false); });
-  // focus trap — while the sheet is open, Tab/Shift+Tab cycles only
-  // through its own links instead of escaping into hidden page content
-  mobileMenu.addEventListener('keydown', (e) => {
-    if(e.key !== 'Tab' || !menuOpen || !menuFocusables.length) return;
-    const first = menuFocusables[0], last = menuFocusables[menuFocusables.length - 1];
-    if(e.shiftKey && document.activeElement === first){ e.preventDefault(); last.focus(); }
-    else if(!e.shiftKey && document.activeElement === last){ e.preventDefault(); first.focus(); }
-  });
-
-  /* =========================================================
-     RUBBER-BANDING — soft resistance at the scroll boundaries
-     instead of a hard stop, springing back once the gesture ends.
-     overscroll-behavior-y:none (see CSS) hands us a clean slate
-     so this is the only bounce that runs, consistently across browsers.
-  ========================================================= */
-  if(!reduceMotion){
-    const mainEl = document.getElementById('top');
-    const rb = makeSpring({ zeta:1, response:0.32 });
-    function applyRB(v){ mainEl.style.transform = v ? `translateY(${v}px)` : ''; }
-    function rubberband(x, d, c = 0.55){ return (x * d * c) / (d + c * Math.abs(x)); }
-    function atBoundaries(){
-      const atTop = window.scrollY <= 0;
-      const scrollMax = document.documentElement.scrollHeight - window.innerHeight;
-      const atBottom = window.scrollY >= scrollMax - 1;
-      return { atTop, atBottom };
-    }
-
-    let overscroll = 0, wheelEndTimer = null;
-    window.addEventListener('wheel', (e) => {
-      const { atTop, atBottom } = atBoundaries();
-      if((atTop && e.deltaY < 0) || (atBottom && e.deltaY > 0)){
-        e.preventDefault();
-        overscroll += -e.deltaY * 0.6;
-        overscroll = atTop ? Math.max(0, overscroll) : Math.min(0, overscroll);
-        const bounded = rubberband(overscroll, window.innerHeight);
-        rb.value = rb.target = bounded; rb.velocity = 0;
-        applyRB(bounded);
-        clearTimeout(wheelEndTimer);
-        wheelEndTimer = setTimeout(() => { overscroll = 0; springTo(rb, 0, { onUpdate: applyRB }); }, 100);
-      }
-    }, { passive:false });
-
-    let touchStartY = null;
-    window.addEventListener('touchstart', (e) => { touchStartY = e.touches[0].clientY; }, { passive:true });
-    window.addEventListener('touchmove', (e) => {
-      if(touchStartY == null) return;
-      const dy = e.touches[0].clientY - touchStartY;
-      const { atTop, atBottom } = atBoundaries();
-      if((atTop && dy > 0) || (atBottom && dy < 0)){
-        e.preventDefault();
-        const bounded = rubberband(dy * 0.6, window.innerHeight);
-        rb.value = rb.target = bounded; rb.velocity = 0;
-        applyRB(bounded);
-      }
-    }, { passive:false });
-    window.addEventListener('touchend', () => {
-      touchStartY = null;
-      springTo(rb, 0, { onUpdate: applyRB });
-    }, { passive:true });
-  }
-})();
-</script>
+<script src="main.js?v=3"></script>
 
 </body>
 </html>
